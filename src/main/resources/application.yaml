@@ -1,0 +1,21 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /Crud
+
+spring:
+  application:
+          name: Crud
+  datasource:
+    url: 'jdbc:mysql://localhost:3306/Crud'
+    username: root
+    password: root
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+jwt:
+  signerKey: "E1BekCxeyRRH7RtPQQeq5I4c6hCLH3pvDB/B1c02cfppX/01vfJYwx3uyWOFQtUl"
+
+
