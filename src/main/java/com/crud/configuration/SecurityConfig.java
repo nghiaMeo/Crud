@@ -1,8 +1,5 @@
 package com.crud.configuration;
 
-import com.crud.enums.Role;
-import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -12,37 +9,38 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
 import org.springframework.security.oauth2.server.resource.authentication.JwtGrantedAuthoritiesConverter;
 import org.springframework.security.web.SecurityFilterChain;
 
+import com.crud.enums.Role;
+
+import lombok.RequiredArgsConstructor;
 
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity
+@RequiredArgsConstructor
 public class SecurityConfig {
 
-    private final String[] PUBLIC_URLS = {"/user", "/auth/token", "/auth/introspect", "/auth/logout"};
+    private final String[] PUBLIC_URLS = {"/user", "/auth/token", "/auth/introspect", "/auth/logout", "/auth/refresh"};
 
-    @Autowired
-    private CustomJwtDecoder customJwtDecoder;
+    private final CustomJwtDecoder customJwtDecoder;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity.authorizeRequests(request ->
-                request.requestMatchers(HttpMethod.POST, PUBLIC_URLS).permitAll()
-                        .requestMatchers(HttpMethod.GET, "/user/users").hasRole(Role.ADMIN.name())
+        httpSecurity.authorizeRequests(request -> request.requestMatchers(HttpMethod.POST, PUBLIC_URLS)
+                .permitAll()
+                .requestMatchers(HttpMethod.GET, "/user/users")
+                .hasRole(Role.ADMIN.name())
+                .anyRequest()
+                .authenticated());
 
-                        .anyRequest().authenticated()
-        );
-
-        httpSecurity.oauth2ResourceServer(httpSecurityOAuth2ResourceServerConfigurer ->
-                httpSecurityOAuth2ResourceServerConfigurer.jwt(jwtConfigurer -> jwtConfigurer.decoder(customJwtDecoder)
-                                .jwtAuthenticationConverter(jwtConverter())
-                        )
-                        .authenticationEntryPoint(new JwtAuthenticationEntryPoint())
-        );
+        httpSecurity.oauth2ResourceServer(
+                httpSecurityOAuth2ResourceServerConfigurer -> httpSecurityOAuth2ResourceServerConfigurer
+                        .jwt(jwtConfigurer ->
+                                jwtConfigurer.decoder(customJwtDecoder).jwtAuthenticationConverter(jwtConverter()))
+                        .authenticationEntryPoint(new JwtAuthenticationEntryPoint()));
 
         httpSecurity.csrf(AbstractHttpConfigurer::disable);
         return httpSecurity.build();

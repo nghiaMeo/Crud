@@ -1,17 +1,16 @@
 package com.crud.exception;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
 public enum ErrorCode {
-
     USERNAME_ALREADY_EXISTS(409, "Username Already Exists", HttpStatus.INTERNAL_SERVER_ERROR),
     USER_NOT_FOUND(404, "User Not Found", HttpStatus.NOT_FOUND),
     USER_ALREADY_EXISTS(409, "User Already Exists", HttpStatus.BAD_REQUEST),
@@ -36,11 +35,9 @@ public enum ErrorCode {
     TOKEN_NOT_EXPIRED(1010, "Token Not Expired", HttpStatus.UNAUTHORIZED),
     TOKEN_INVALID(1011, "Token Invalid", HttpStatus.UNAUTHORIZED),
     INVALID_KEY(1012, "Invalid Key", HttpStatus.BAD_REQUEST),
-
     ;
 
     private int code;
     private String message;
     private HttpStatusCode httpStatusCode;
-
 }

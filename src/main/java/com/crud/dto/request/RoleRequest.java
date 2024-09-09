@@ -1,8 +1,8 @@
 package com.crud.dto.request;
 
-import lombok.*;
-
 import java.util.Set;
+
+import lombok.*;
 
 @Data
 @NoArgsConstructor

@@ -1,11 +1,11 @@
 package com.crud.validation;
 
-import jakarta.validation.ConstraintValidator;
-import jakarta.validation.ConstraintValidatorContext;
-
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.Objects;
+
+import jakarta.validation.ConstraintValidator;
+import jakarta.validation.ConstraintValidatorContext;
 
 public class DateValidator implements ConstraintValidator<ValidDate, LocalDate> {
 
@@ -32,5 +32,4 @@ public class DateValidator implements ConstraintValidator<ValidDate, LocalDate> 
 
         return date.isAfter(minDate) && date.isBefore(now);
     }
-
 }

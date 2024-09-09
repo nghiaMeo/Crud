@@ -1,13 +1,14 @@
 package com.crud.dto.request;
 
-import com.crud.validation.ValidDate;
+import java.time.LocalDate;
+
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
-import lombok.*;
 
-import java.time.LocalDate;
-import java.util.Set;
+import com.crud.validation.ValidDate;
+
+import lombok.*;
 
 @Getter
 @Setter
@@ -25,12 +26,10 @@ public class UserUpdateRequest {
     @Email(message = "ACCESS_DENIED", regexp = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$")
     @NotEmpty(message = "EMAIL_NOT_EXISTS")
     private String email;
+
     private String firstname;
     private String lastname;
 
     @ValidDate(message = "INVALID_BIRTHDAY", min = 18)
     private LocalDate birthday;
-
-    private Set<String> roles;
-
 }

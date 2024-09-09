@@ -12,5 +12,4 @@ import lombok.Setter;
 public class AppException extends RuntimeException {
 
     private ErrorCode errorCode;
-
 }

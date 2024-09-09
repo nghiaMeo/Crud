@@ -1,11 +1,13 @@
 package com.crud.model;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import jakarta.persistence.*;
-import lombok.*;
-
 import java.time.LocalDate;
 import java.util.Set;
+
+import jakarta.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+
+import lombok.*;
 
 @Entity
 @Getter
@@ -35,11 +37,9 @@ public class User {
     private String lastname;
 
     @Column
-
     private LocalDate birthday;
 
     @Column
     @ManyToMany
     private Set<Role> roles;
-
 }

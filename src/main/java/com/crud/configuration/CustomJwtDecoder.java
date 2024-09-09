@@ -1,10 +1,9 @@
 package com.crud.configuration;
 
-import com.crud.dto.request.IntrospectRequest;
-import com.crud.service.AuthenticationService;
-import com.nimbusds.jose.JOSEException;
-import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import java.text.ParseException;
+import java.util.Objects;
+import javax.crypto.spec.SecretKeySpec;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.oauth2.jose.jws.MacAlgorithm;
 import org.springframework.security.oauth2.jwt.Jwt;
@@ -13,26 +12,22 @@ import org.springframework.security.oauth2.jwt.JwtException;
 import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
 import org.springframework.stereotype.Component;
 
-import javax.crypto.spec.SecretKeySpec;
-import java.text.ParseException;
-import java.util.Objects;
+import com.crud.dto.request.IntrospectRequest;
+import com.crud.service.AuthenticationService;
+import com.nimbusds.jose.JOSEException;
+
+import lombok.RequiredArgsConstructor;
 
 @Component
+@RequiredArgsConstructor
 public class CustomJwtDecoder implements JwtDecoder {
 
-    @Autowired
-    private AuthenticationService authenticationService;
+    private final AuthenticationService authenticationService;
 
     @Value("${jwt.signerKey}")
     private String signerKey;
 
     private NimbusJwtDecoder nimbusJwtDecoder = null;
-
-    @Autowired
-    public CustomJwtDecoder(AuthenticationService authenticationService) {
-        this.authenticationService = authenticationService;
-    }
-
 
     @Override
     public Jwt decode(String token) throws JwtException {

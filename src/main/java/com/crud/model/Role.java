@@ -1,10 +1,10 @@
 package com.crud.model;
 
+import java.util.Set;
 
 import jakarta.persistence.*;
-import lombok.*;
 
-import java.util.Set;
+import lombok.*;
 
 @Getter
 @Setter
@@ -16,9 +16,9 @@ public class Role {
 
     @Id
     private String name;
+
     private String description;
 
     @ManyToMany
     private Set<Permission> permissions;
-
 }

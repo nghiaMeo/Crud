@@ -1,15 +1,17 @@
 package com.crud.service;
 
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
 import com.crud.dto.request.PermissionRequest;
 import com.crud.dto.response.PermissionResponse;
 import com.crud.mapper.PermissionMapper;
 import com.crud.model.Permission;
 import com.crud.repository.PermissionRepository;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -29,15 +31,10 @@ public class PermissionService {
     public List<PermissionResponse> findAll() {
         var permissions = permissionRepository.findAll();
 
-        return permissions
-                .stream()
-                .map(permissionMapper::toPermissionResponse)
-                .toList();
+        return permissions.stream().map(permissionMapper::toPermissionResponse).toList();
     }
 
     public void delete(String permissionId) {
         permissionRepository.deleteById(permissionId);
     }
-
-
 }

@@ -1,11 +1,11 @@
 package com.crud.mapper;
 
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
 import com.crud.dto.request.RoleRequest;
 import com.crud.dto.response.RoleResponse;
 import com.crud.model.Role;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
 
 @Mapper(componentModel = "spring")
 public interface RoleMapper {

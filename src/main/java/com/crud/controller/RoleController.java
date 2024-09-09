@@ -1,14 +1,16 @@
 package com.crud.controller;
 
+import java.util.List;
+
+import org.springframework.web.bind.annotation.*;
+
 import com.crud.dto.request.RoleRequest;
 import com.crud.dto.response.ApiResponse;
 import com.crud.dto.response.RoleResponse;
 import com.crud.service.RoleService;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/roles")
@@ -22,7 +24,6 @@ public class RoleController {
         return ApiResponse.<RoleResponse>builder()
                 .results(roleService.create(roleRequest))
                 .build();
-
     }
 
     @GetMapping
@@ -30,7 +31,6 @@ public class RoleController {
         return ApiResponse.<List<RoleResponse>>builder()
                 .results(roleService.findAll())
                 .build();
-
     }
 
     @DeleteMapping("/{roleId}")

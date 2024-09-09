@@ -1,13 +1,13 @@
 package com.crud.mapper;
 
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
 
 import com.crud.dto.request.UserCreationRequest;
 import com.crud.dto.request.UserUpdateRequest;
 import com.crud.dto.response.UserResponse;
 import com.crud.model.User;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.MappingTarget;
 
 @Mapper(componentModel = "spring")
 public interface UserMapper {
@@ -18,5 +18,4 @@ public interface UserMapper {
     User updateUser(@MappingTarget User user, UserUpdateRequest request);
 
     UserResponse toUserResponse(User user);
-
 }

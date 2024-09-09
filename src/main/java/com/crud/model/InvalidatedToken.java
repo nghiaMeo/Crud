@@ -1,10 +1,11 @@
 package com.crud.model;
 
+import java.util.Date;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import lombok.*;
 
-import java.util.Date;
+import lombok.*;
 
 @Entity
 @Setter
@@ -16,6 +17,6 @@ public class InvalidatedToken {
 
     @Id
     private String id;
-    private Date expiryTime;
 
+    private Date expiryTime;
 }

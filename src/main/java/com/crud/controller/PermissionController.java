@@ -1,15 +1,16 @@
 package com.crud.controller;
 
+import java.util.List;
+
+import org.springframework.web.bind.annotation.*;
+
 import com.crud.dto.request.PermissionRequest;
 import com.crud.dto.response.ApiResponse;
 import com.crud.dto.response.PermissionResponse;
 import com.crud.service.PermissionService;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/permissions")
@@ -23,7 +24,6 @@ public class PermissionController {
         return ApiResponse.<PermissionResponse>builder()
                 .results(permissionService.create(permissionRequest))
                 .build();
-
     }
 
     @GetMapping

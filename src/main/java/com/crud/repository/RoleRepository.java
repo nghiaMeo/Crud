@@ -1,7 +1,7 @@
 package com.crud.repository;
 
-import com.crud.model.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface RoleRepository extends JpaRepository<Role, String> {
-}
+import com.crud.model.Role;
+
+public interface RoleRepository extends JpaRepository<Role, String> {}

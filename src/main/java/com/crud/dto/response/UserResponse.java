@@ -1,15 +1,13 @@
 package com.crud.dto.response;
 
-import lombok.*;
-
 import java.time.LocalDate;
 import java.util.Set;
+
+import lombok.*;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
-@Setter
 @Builder
 public class UserResponse {
 
